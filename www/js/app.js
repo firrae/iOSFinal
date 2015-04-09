@@ -52,7 +52,8 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     url: "/browseferry",
     views: {
       'menuContent': {
-        templateUrl: "templates/browse.html"
+        templateUrl: "templates/browse.html",
+        controller: "FerryCtrl"
       }
     }
   })
@@ -72,7 +73,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     views: {
       'menuContent': {
         templateUrl: "templates/playlist.html",
-        controller: 'PlaylistCtrl'
+        controller: "PlaylistCtrl"
       }
     }
   });
