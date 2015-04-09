@@ -47,6 +47,16 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       }
     }
   })
+
+  .state('app.browseferry', {
+    url: "/browseferry",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/browse.html"
+      }
+    }
+  })
+
     .state('app.playlists', {
       url: "/playlists",
       views: {
