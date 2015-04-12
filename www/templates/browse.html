@@ -1,38 +1,47 @@
 <ion-view view-title="Bridge Crossings">
   <ion-content>
-    <div class="list card">
+    <ion-refresher
+          pulling-text="Pull to refresh..."
+          on-refresh="doRefresh()">
+    </ion-refresher>
+    <span class="item item-input">
+      <i class="icon ion-search placeholder-icon"></i>
+      <input type="search" placeholder="Search" ng-model="searchByName">
+    </span>
+    <div class="list card" ng-repeat="bridge in bridges | filter:searchByName">
 
       <div class="item item-avatar">
-        <img src="http://lorempixel.com/90/90/">
-        <h2>Marty McFly</h2>
-        <p>November 05, 1955</p>
+        <h2>{{ bridge.location }}</h2>
+        <h4>{{ bridge.customsOffice }}</h4>
+        <p>{{ bridge.lastUpdated }}</p>
       </div>
 
       <div class="item item-body">
-        <img class="full-image" src="http://lorempixel.com/400/200/">
+        <!--<img class="full-image" src="http://lorempixel.com/400/200/">-->
+        <div class="leftCol">
+            <h2>To Canada</h2>
+            <p>Traveller Flow: {{ bridge.canTravellersFlow }}</p>
+            <p>Commercial Flow: {{ bridge.canCommercialFlow }}</p>
+        </div>
+        <div class="rightCol">
+            <h2>To United States</h2>
+            <p>Traveller Flow: {{ bridge.usTravellersFlow }}</p>
+            <p>Commercial Flow: {{ bridge.usCommercialFlow }}</p>
+        </div>
         <p>
-          This is a "Facebook" styled Card. The header is created from a Thumbnail List item,
-          the content is from a card-body consisting of an image and paragraph text. The footer
-          consists of tabs, icons aligned left, within the card-footer.
-        </p>
-        <p>
-          <a href="#" class="subdued">1 Approval</a>
-          <a href="#" class="subdued">5 Corrections</a>
+          <a href="#" class="subdued">{{ numLikes(bridge) }} Approval</a>
+          <a href="#" class="subdued">{{ bridge.correctionsCanCommercialFlow.length + bridge.correctionsCanTravellersFlow.length + bridge.correctionsUsCommercialFlow.length + bridge.correctionsUsCommercialFlow.length }} Corrections</a>
         </p>
       </div>
 
       <div class="item tabs tabs-secondary tabs-icon-left">
-        <a class="tab-item" href="#">
+        <a class="tab-item" href="#" ng-click="like(bridge); bridge.likes = bridge.likes + 1">
           <i class="icon ion-thumbsup"></i>
           Approve
         </a>
-        <a class="tab-item" href="#">
+        <a class="tab-item" href="#" ng-click="correctionModal(bridge)">
           <i class="icon ion-chatbox"></i>
           Correct
-        </a>
-        <a class="tab-item" href="#">
-          <i class="icon ion-share"></i>
-          Share
         </a>
       </div>
 
