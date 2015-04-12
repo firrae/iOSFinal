@@ -1,0 +1,77 @@
+<ion-view view-title="{{ bridge.customsOffice }}">
+    <ion-content>
+        <ion-refresher
+                pulling-text="Pull to refresh..."
+                on-refresh="doRefresh()">
+        </ion-refresher>
+        <div class="list card">
+
+            <div class="item item-avatar">
+                <h2>{{ bridge.location }}</h2>
+                <p>{{ bridge.lastUpdated }}</p>
+            </div>
+
+            <div class="item item-body">
+                <div class="leftCol">
+                    <h2>To Canada</h2>
+                    <p>Traveller Flow: {{ bridge.canTravellersFlow }}</p>
+                    <p>Commercial Flow: {{ bridge.canCommercialFlow }}</p>
+                </div>
+                <div class="rightCol">
+                    <h2>To United States</h2>
+                    <p>Traveller Flow: {{ bridge.usTravellersFlow }}</p>
+                    <p>Commercial Flow: {{ bridge.usCommercialFlow }}</p>
+                </div>
+                <p>
+                    <a href="#" class="subdued">{{ bridge.likes }} Approval</a>
+                    <a href="#" class="subdued">{{ bridge.correctionsCanCommercialFlow.length + bridge.correctionsCanTravellersFlow.length + bridge.correctionsUsCommercialFlow.length + bridge.correctionsUsCommercialFlow.length }} Corrections</a>
+                </p>
+            </div>
+
+            <div class="item tabs tabs-secondary tabs-icon-left">
+                <a class="tab-item" href="#" ng-click="like(bridge); bridge.likes = bridge.likes + 1">
+                    <i class="icon ion-thumbsup"></i>
+                    Approve
+                </a>
+                <a class="tab-item" href="#" ng-click="correctionModal(bridge)">
+                    <i class="icon ion-chatbox"></i>
+                    Correct
+                </a>
+            </div>
+        </div>
+
+
+        <div class="item item-divider">
+            Corrections
+        </div>
+
+        <div class="list card" ng-repeat="correction1 in bridge.correctionsUsTravellersFlow" ng-if="bridge.correctionsUsTravellersFlow.length > 0">
+            <div class="item item-body">
+                <div class="leftCol">
+                    Travellers to US {{ correction1.minutes }} minutes
+                </div>
+            </div>
+        </div>
+        <div class="list card" ng-repeat="correction2 in bridge.correctionsUsCommercialFlow" ng-if="bridge.correctionsUsCommercialFlow.length > 0">
+            <div class="item item-body">
+                <div class="leftCol">
+                    Commercial to US {{ correction2.minutes }} minutes
+                </div>
+            </div>
+        </div>
+        <div class="list card" ng-repeat="correction3 in bridge.correctionsCanTravellersFlow" ng-if="bridge.correctionsCanTravellersFlow.length > 0">
+            <div class="item item-body">
+                <div class="leftCol">
+                    Travellers to Canada {{ correction3.minutes }} minutes
+                </div>
+            </div>
+        </div>
+        <div class="list card" ng-repeat="correction4 in bridge.correctionsCanCommercialFlow" ng-if="bridge.correctionsCanCommercialFlow.length > 0">
+            <div class="item item-body">
+                <div class="leftCol">
+                    Commercial to Canada {{ correction4.minutes }} minutes
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
