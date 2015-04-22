@@ -34,7 +34,7 @@ angular.module('starter.controllers', [])
 })
 
 .controller('SingleCtrl', function($scope, $stateParams, $http, $ionicModal, $timeout) {
-    $http.get('http://mobile-final-server.herokuapp.com/bridges/' + $stateParams.bridgeID)
+    $http.get('http://localhost:8080/JavaFinal/b/bridge/' + $stateParams.bridgeID)
         .success(function(data, status, headers, config) {
             console.log(data);
             $scope.bridge = data;
@@ -43,11 +43,11 @@ angular.module('starter.controllers', [])
 
         $scope.like = function(object) {
             console.log("liked! " + object._id);
-            $http.post('http://mobile-final-server.herokuapp.com/likes/' + object._id);
+            $http.post('http://localhost:8080/JavaFinal/b/like/' + object._id);
         };
 
         $scope.doRefresh = function() {
-            $http.get('http://mobile-final-server.herokuapp.com/bridges/' + $stateParams.bridgeID)
+            $http.get('http://localhost:8080/JavaFinal/b/bridge/' + $stateParams.bridgeID)
                 .success(function(data, status, headers, config) {
                     console.log(data);
                     $scope.bridges = data;
@@ -85,9 +85,8 @@ angular.module('starter.controllers', [])
     $scope.doLogin = function() {
         console.log('Doing login', $scope.correctionDirection);
 
-        $http.post('http://mobile-final-server.herokuapp.com/correct',
+        $http.post('http://localhost:8080/JavaFinal/b/correction/' + $scope.tempBridge._id,
             {
-                ObjectId : $scope.tempBridge._id,
                 minutes : $scope.correctionDirection.time,
                 field : $scope.correctionDirection.direction.value
             });
@@ -121,7 +120,7 @@ angular.module('starter.controllers', [])
 
     $scope.like = function(object) {
         console.log("liked! " + object._id);
-        $http.post('http://mobile-final-server.herokuapp.com/likes/' + object._id);
+        $http.post('http://localhost:8080/JavaFinal/b/like/' + object._id);
     };
 
     $scope.numLikes = function(object) {
@@ -129,7 +128,7 @@ angular.module('starter.controllers', [])
     };
 
     $scope.doRefresh = function() {
-        $http.get('http://mobile-final-server.herokuapp.com/bridges')
+        $http.get('http://localhost:8080/JavaFinal/b/bridge')
             .success(function(data, status, headers, config) {
                 //console.log(data);
                 $scope.bridges = data;
@@ -167,9 +166,8 @@ angular.module('starter.controllers', [])
     $scope.doLogin = function() {
         console.log('Doing login', $scope.correctionDirection);
 
-        $http.post('http://mobile-final-server.herokuapp.com/correct',
+        $http.post('http://localhost:8080/JavaFinal/b/correction/' + $scope.tempBridge._id,
             {
-                ObjectId : $scope.tempBridge._id,
                 minutes : $scope.correctionDirection.time,
                 field : $scope.correctionDirection.direction.value
             });
